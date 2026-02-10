@@ -12,15 +12,8 @@ export default defineConfig({
     })
   ],
   build: {
-    // Enable minification
-    minify: 'terser',
-    terserOptions: {
-      compress: {
-        drop_console: true, // Remove console.logs in production
-        drop_debugger: true,
-        pure_funcs: ['console.log', 'console.info', 'console.debug'],
-      }
-    },
+    // Enable minification with esbuild (faster than terser, built into Vite)
+    minify: 'esbuild',
     // Optimize chunk splitting
     rollupOptions: {
       output: {
@@ -44,6 +37,10 @@ export default defineConfig({
     sourcemap: false,
     // Target modern browsers for smaller bundle
     target: 'es2015',
+  },
+  // Configure esbuild for production
+  esbuild: {
+    drop: ['console', 'debugger'],
   },
   // Optimize dependencies
   optimizeDeps: {
