@@ -23,7 +23,7 @@ const FloatingCallButton: React.FC = () => {
       />
       
       <motion.a
-        href="tel:9475711559"
+        href="tel:9932552763"
         initial={{ scale: 0, y: 100 }}
         animate={{ scale: 1, y: 0 }}
         transition={{ type: "spring", stiffness: 200, damping: 15, delay: 0.8 }}

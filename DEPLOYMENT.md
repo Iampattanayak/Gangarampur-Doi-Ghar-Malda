@@ -182,7 +182,7 @@ firebase deploy
 - Get actual coordinates from Google Maps
 
 ✅ **Verify Phone Number**
-- Current: 9475711559
+- Current: 9932552763
 - Used in: Header, Footer, ProductCard, ProductModal, FloatingCallButton
 
 ✅ **Add Favicon**
@@ -198,7 +198,7 @@ npm run preview
 ✅ **Environment Variables** (if needed)
 Create `.env`:
 ```
-VITE_PHONE_NUMBER=9475711559
+VITE_PHONE_NUMBER=9932552763
 VITE_GOOGLE_MAPS_API_KEY=your_api_key_here
 ```
 
@@ -289,7 +289,7 @@ Add to `index.html` in `<head>`:
 ### Test URLs:
 - Homepage: `/`
 - Direct product links: `/#bestsellers`, `/#ice_cream`
-- Call functionality: `tel:9475711559`
+- Call functionality: `tel:9932552763`
 
 ---
 
@@ -317,7 +317,7 @@ Add to `index.html` in `<head>`:
 
 For issues or questions:
 - 📧 Email: [your-email]
-- 📞 Phone: 9475711559
+- 📞 Phone: 9932552763
 - 📍 Visit: Gangarampur Doi Ghar
 
 ---

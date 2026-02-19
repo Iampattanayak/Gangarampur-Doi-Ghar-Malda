@@ -163,11 +163,11 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, onClose }) => {
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               transition={{ duration: 0.1 }}
-              href="tel:9475711559"
+              href="tel:9932552763"
               className="block w-full bg-gradient-to-r from-brand-600 to-brand-500 text-white py-6 rounded-xl font-black text-center hover:shadow-strong transition-all flex items-center justify-center gap-3 text-lg sm:text-xl border-4 border-brand-700 shadow-medium min-h-[68px]"
             >
               <Phone className="w-6 h-6 sm:w-7 sm:h-7" strokeWidth={3} />
-              <span>Call to Order: 9475711559</span>
+              <span>Call to Order: 9932552763</span>
             </motion.a>
 
             <p className="text-center text-gray-500 text-sm mt-5 font-medium">

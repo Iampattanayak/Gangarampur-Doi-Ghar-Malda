@@ -43,7 +43,7 @@
 
 ### 5. User Interactions
 ✅ Click product → Opens detail modal
-✅ Click "Order" → Calls 9475711559
+✅ Click "Order" → Calls 9932552763
 ✅ Search → Real-time filtering
 ✅ Category pills → Smooth scroll to section
 ✅ Floating mobile call button
@@ -106,7 +106,7 @@ e:\shop\
 
 ## 📞 Store Information
 - **Name:** Gangarampur Doi Ghar
-- **Phone:** 9475711559
+- **Phone:** 9932552763
 - **Location:** Opposite Umesh College Gate, Gangarampur, Malda
 - **Hours:** 7:00 AM - 9:00 PM (Daily)
 

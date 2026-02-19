@@ -111,7 +111,7 @@ Your site will be live in ~30 seconds! ✨
 
 **Store Name:** Gangarampur Doi Ghar  
 **Location:** Opposite Malda womens College Gate, Malda, West Bengal  
-**Phone:** 9475711559  
+**Phone:** 9932552763  
 **Hours:** 7:00 AM - 9:00 PM (Monday - Sunday)
 
 ## 🎨 Design Philosophy

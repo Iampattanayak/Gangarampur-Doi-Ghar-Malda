@@ -56,10 +56,10 @@ const Footer: React.FC = () => {
               <motion.a
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                href="tel:9475711559"
+                href="tel:9932552763"
                 className="block p-7 bg-white text-gray-900 rounded-2xl font-black text-center hover:shadow-strong transition-all text-2xl shadow-strong border-4 border-gray-300"
               >
-                📞 Call: 9475711559
+                📞 Call: 9932552763
               </motion.a>
 
               <div className="p-6 bg-gray-900 rounded-xl border-2 border-gray-800 shadow-medium">

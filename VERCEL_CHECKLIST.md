@@ -49,7 +49,7 @@ vercel --prod
 
 ✅ Site loads correctly
 ✅ All images appear
-✅ Phone number click works (tel:9475711559)
+✅ Phone number click works (tel:9932552763)
 ✅ Search functionality works
 ✅ Product modals open correctly
 ✅ Category navigation scrolls smoothly

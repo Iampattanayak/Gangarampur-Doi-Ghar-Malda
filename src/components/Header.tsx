@@ -42,7 +42,7 @@ const Header: React.FC<HeaderProps> = ({ onSearchClick }) => {
           <motion.a
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.98 }}
-            href="tel:9475711559"
+            href="tel:9932552763"
             className="hidden md:flex items-center gap-2.5 bg-brand-600 text-white px-6 py-4 rounded-xl font-black hover:shadow-strong transition-all duration-200 border-2 border-brand-800 text-base"
             style={{
               background: 'linear-gradient(135deg, #E63946 0%, #FF6B6B 100%)',
