@@ -65,31 +65,31 @@ const Hero: React.FC = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.8, duration: 0.8 }}
-            className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-12 max-w-2xl mx-auto"
+            className="grid grid-cols-2 gap-3 sm:gap-6 mb-12 max-w-2xl mx-auto"
           >
             <motion.div 
               whileHover={{ scale: 1.05, y: -5 }}
-              className="flex items-center gap-4 bg-white/80 backdrop-blur-sm px-6 py-4 rounded-2xl shadow-lg border-2 border-brand-100"
+              className="flex items-center gap-2 sm:gap-4 bg-white/80 backdrop-blur-sm px-3 sm:px-6 py-3 sm:py-4 rounded-xl sm:rounded-2xl shadow-lg border-2 border-brand-100"
             >
-              <div className="p-3 bg-gradient-to-br from-amber-400 to-yellow-500 rounded-xl shadow-md">
-                <Award className="w-6 h-6 text-white" strokeWidth={2.5} />
+              <div className="p-2 sm:p-3 bg-gradient-to-br from-amber-400 to-yellow-500 rounded-lg sm:rounded-xl shadow-md flex-shrink-0">
+                <Award className="w-5 h-5 sm:w-6 sm:h-6 text-white" strokeWidth={2.5} />
               </div>
               <div className="text-left">
-                <span className="font-bold text-lg text-gray-900 block">Premium Quality</span>
-                <span className="text-sm text-gray-600">Certified Excellence</span>
+                <span className="font-bold text-sm sm:text-lg text-gray-900 block leading-tight">Premium Quality</span>
+                <span className="text-xs sm:text-sm text-gray-600 hidden sm:block">Certified Excellence</span>
               </div>
             </motion.div>
 
             <motion.div 
               whileHover={{ scale: 1.05, y: -5 }}
-              className="flex items-center gap-4 bg-white/80 backdrop-blur-sm px-6 py-4 rounded-2xl shadow-lg border-2 border-brand-100"
+              className="flex items-center gap-2 sm:gap-4 bg-white/80 backdrop-blur-sm px-3 sm:px-6 py-3 sm:py-4 rounded-xl sm:rounded-2xl shadow-lg border-2 border-brand-100"
             >
-              <div className="p-3 bg-gradient-to-br from-emerald-400 to-green-500 rounded-xl shadow-md">
-                <Clock className="w-6 h-6 text-white" strokeWidth={2.5} />
+              <div className="p-2 sm:p-3 bg-gradient-to-br from-emerald-400 to-green-500 rounded-lg sm:rounded-xl shadow-md flex-shrink-0">
+                <Clock className="w-5 h-5 sm:w-6 sm:h-6 text-white" strokeWidth={2.5} />
               </div>
               <div className="text-left">
-                <span className="font-bold text-lg text-gray-900 block">Fresh Daily</span>
-                <span className="text-sm text-gray-600">Made Every Morning</span>
+                <span className="font-bold text-sm sm:text-lg text-gray-900 block leading-tight">Fresh Daily</span>
+                <span className="text-xs sm:text-sm text-gray-600 hidden sm:block">Made Every Morning</span>
               </div>
             </motion.div>
           </motion.div>
@@ -99,15 +99,15 @@ const Hero: React.FC = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1, duration: 0.8 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center"
+            className="flex flex-row gap-3 sm:gap-4 justify-center"
           >
             <motion.a
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               href="tel:9932552763"
-              className="flex items-center justify-center gap-3 bg-brand-600 hover:bg-brand-700 text-white px-8 py-4 rounded-xl font-bold text-lg shadow-xl transition-colors"
+              className="flex items-center justify-center gap-2 sm:gap-3 bg-red-600 hover:bg-red-700 text-white px-4 sm:px-8 py-3 sm:py-4 rounded-xl font-bold text-sm sm:text-lg shadow-xl transition-colors"
             >
-              <Phone className="w-5 h-5" />
+              <Phone className="w-4 h-4 sm:w-5 sm:h-5" />
               <span>Call to Order</span>
             </motion.a>
 
@@ -117,9 +117,9 @@ const Hero: React.FC = () => {
               href="https://maps.app.goo.gl/4sRwmzJjDPTh7r7N6"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-center gap-3 bg-white hover:bg-gray-50 text-brand-600 px-8 py-4 rounded-xl font-bold text-lg shadow-xl transition-colors border-2 border-brand-200"
+              className="flex items-center justify-center gap-2 sm:gap-3 bg-white hover:bg-gray-50 text-brand-600 px-4 sm:px-8 py-3 sm:py-4 rounded-xl font-bold text-sm sm:text-lg shadow-xl transition-colors border-2 border-brand-200"
             >
-              <MapPin className="w-5 h-5" />
+              <MapPin className="w-4 h-4 sm:w-5 sm:h-5" />
               <span>Visit Us</span>
             </motion.a>
           </motion.div>
