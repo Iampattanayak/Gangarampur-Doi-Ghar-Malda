@@ -48,22 +48,6 @@ const Hero: React.FC = () => {
         </AnimatePresence>
       </div>
 
-      {/* Carousel Indicators */}
-      <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 z-30 flex gap-2">
-        {carouselImages.map((_, index) => (
-          <button
-            key={index}
-            onClick={() => setCurrentSlide(index)}
-            className={`transition-all duration-300 rounded-full ${
-              index === currentSlide 
-                ? 'w-8 h-2 bg-brand-600' 
-                : 'w-2 h-2 bg-gray-400 hover:bg-gray-600'
-            }`}
-            aria-label={`Go to slide ${index + 1}`}
-          />
-        ))}
-      </div>
-
       {/* Main Content */}
       <div className="max-w-7xl mx-auto px-4 py-20 md:py-28 lg:py-32 relative z-20">
         <motion.div
@@ -152,15 +136,15 @@ const Hero: React.FC = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1, duration: 0.8 }}
-            className="flex flex-row gap-3 sm:gap-4 justify-center"
+            className="grid grid-cols-2 gap-3 sm:gap-6 max-w-2xl mx-auto"
           >
             <motion.a
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               href="tel:9932552763"
-              className="flex items-center justify-center gap-2 sm:gap-3 bg-red-600 hover:bg-red-700 text-white px-4 sm:px-8 py-3 sm:py-4 rounded-xl font-bold text-sm sm:text-lg shadow-2xl transition-colors"
+              className="flex items-center justify-center gap-2 sm:gap-3 bg-red-600 hover:bg-red-700 text-white px-3 sm:px-6 py-3 sm:py-4 rounded-xl sm:rounded-2xl font-bold text-sm sm:text-lg shadow-2xl transition-colors"
             >
-              <Phone className="w-4 h-4 sm:w-5 sm:h-5" />
+              <Phone className="w-5 h-5 sm:w-6 sm:h-6" />
               <span>Call to Order</span>
             </motion.a>
 
@@ -170,9 +154,9 @@ const Hero: React.FC = () => {
               href="https://maps.app.goo.gl/4sRwmzJjDPTh7r7N6"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-center gap-2 sm:gap-3 bg-white hover:bg-gray-50 text-brand-600 px-4 sm:px-8 py-3 sm:py-4 rounded-xl font-bold text-sm sm:text-lg shadow-2xl transition-colors border-2 border-brand-200"
+              className="flex items-center justify-center gap-2 sm:gap-3 bg-white hover:bg-gray-50 text-brand-600 px-3 sm:px-6 py-3 sm:py-4 rounded-xl sm:rounded-2xl font-bold text-sm sm:text-lg shadow-2xl transition-colors border-2 border-brand-200"
             >
-              <MapPin className="w-4 h-4 sm:w-5 sm:h-5" />
+              <MapPin className="w-5 h-5 sm:w-6 sm:h-6" />
               <span>Visit Us</span>
             </motion.a>
           </motion.div>
