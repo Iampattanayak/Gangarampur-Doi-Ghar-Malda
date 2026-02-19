@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
 import { Award, Clock, Phone, MapPin } from 'lucide-react';
 import logo from '../assets/logo.png';
 import product1 from '../assets/product1.jpeg';
@@ -9,211 +9,247 @@ import product3 from '../assets/product3.jpeg';
 const Hero: React.FC = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const carouselImages = [product1, product2, product3];
+  const { scrollY } = useScroll();
+  const imageY = useTransform(scrollY, [0, 500], [0, 150]);
+  const contentY = useTransform(scrollY, [0, 500], [0, 100]);
 
-  // Auto-advance carousel every 5 seconds
+  // Auto-advance carousel every 6 seconds
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % carouselImages.length);
-    }, 5000);
+    }, 6000);
     return () => clearInterval(timer);
   }, [carouselImages.length]);
 
   return (
     <motion.section 
-      className="relative bg-gradient-to-br from-brand-50 via-accent-50 to-orange-50 overflow-hidden min-h-[600px] md:min-h-[700px]"
+      className="relative bg-gradient-to-br from-slate-900 via-gray-900 to-zinc-900 overflow-hidden min-h-[650px] md:min-h-[750px]"
     >
-      {/* Advanced Image Carousel Background */}
+      {/* Elegant Image Carousel with Parallax */}
       <div className="absolute inset-0 overflow-hidden">
-        <AnimatePresence initial={false}>
-          {carouselImages.map((image, index) => (
-            index === currentSlide && (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, scale: 1.1 }}
-                animate={{ 
-                  opacity: 1, 
-                  scale: 1.05,
+        <motion.div style={{ y: imageY }} className="w-full h-full">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={currentSlide}
+              initial={{ opacity: 0, scale: 1.05 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              transition={{ 
+                duration: 1.2, 
+                ease: [0.43, 0.13, 0.23, 0.96] // Custom easing for smoothness
+              }}
+              className="absolute inset-0"
+            >
+              <div 
+                className="w-full h-full bg-cover bg-center transform scale-110"
+                style={{
+                  backgroundImage: `url(${carouselImages[currentSlide]})`,
+                  backgroundPosition: 'center',
                 }}
-                exit={{ opacity: 0, scale: 1 }}
-                transition={{ 
-                  opacity: { duration: 1.5, ease: "easeInOut" },
-                  scale: { duration: 10, ease: "linear" }
-                }}
-                className="absolute inset-0"
-              >
-                {/* Image with Ken Burns effect */}
-                <div 
-                  className="w-full h-full bg-cover bg-center"
-                  style={{
-                    backgroundImage: `url(${image})`,
-                    filter: 'blur(3px)',
-                  }}
-                />
-              </motion.div>
-            )
-          ))}
-        </AnimatePresence>
+              />
+            </motion.div>
+          </AnimatePresence>
+        </motion.div>
 
-        {/* Multi-layer Overlay for depth and readability */}
-        <div className="absolute inset-0 bg-gradient-to-br from-black/60 via-black/50 to-black/60" />
-        <div className="absolute inset-0 bg-gradient-to-b from-brand-900/40 via-transparent to-white/90" />
-        <div className="absolute inset-0 bg-gradient-to-r from-brand-50/30 via-transparent to-accent-50/30" />
+        {/* Professional Vignette Overlay */}
+        <div className="absolute inset-0 bg-gradient-radial from-transparent via-black/40 to-black/80" 
+             style={{
+               background: 'radial-gradient(ellipse at center, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.7) 70%, rgba(0,0,0,0.9) 100%)'
+             }}
+        />
         
-        {/* Decorative gradient orbs */}
-        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-gradient-to-br from-brand-400/20 to-transparent rounded-full blur-3xl" />
-        <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-gradient-to-tr from-accent-400/20 to-transparent rounded-full blur-3xl" />
+        {/* Subtle gradient for brand color */}
+        <div className="absolute inset-0 bg-gradient-to-br from-brand-900/30 via-transparent to-amber-900/20" />
+        
+        {/* Bottom strong fade */}
+        <div className="absolute bottom-0 inset-x-0 h-48 bg-gradient-to-t from-black/60 to-transparent" />
       </div>
 
-      {/* Carousel Indicators */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 flex gap-2">
+      {/* Modern Carousel Indicators */}
+      <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-30 flex gap-3">
         {carouselImages.map((_, index) => (
           <button
             key={index}
             onClick={() => setCurrentSlide(index)}
-            className={`transition-all duration-300 rounded-full ${
-              index === currentSlide 
-                ? 'w-8 h-2 bg-white shadow-lg' 
-                : 'w-2 h-2 bg-white/50 hover:bg-white/75'
-            }`}
+            className="group relative"
             aria-label={`Go to slide ${index + 1}`}
-          />
+          >
+            <div className={`h-1 rounded-full transition-all duration-500 ${
+              index === currentSlide 
+                ? 'w-12 bg-white' 
+                : 'w-8 bg-white/40 group-hover:bg-white/60'
+            }`} />
+            {index === currentSlide && (
+              <motion.div
+                layoutId="activeIndicator"
+                className="absolute inset-0 h-1 bg-white rounded-full"
+                initial={false}
+                transition={{ type: "spring", stiffness: 380, damping: 30 }}
+              />
+            )}
+          </button>
         ))}
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 py-20 md:py-28 lg:py-32 relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.3 }}
-          className="text-center max-w-4xl mx-auto"
-        >
-          {/* Logo with enhanced shadow for visibility */}
+      {/* Content with Parallax */}
+      <motion.div 
+        style={{ y: contentY }}
+        className="max-w-7xl mx-auto px-4 py-24 md:py-32 lg:py-40 relative z-20"
+      >
+        <div className="text-center max-w-5xl mx-auto">
+          {/* Logo with Enhanced Presence */}
           <motion.div
-            initial={{ scale: 0.8, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.5 }}
-            className="flex justify-center mb-8"
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="flex justify-center mb-10"
           >
-            <img 
-              src={logo} 
-              alt="Gangarampur Doi Ghar" 
-              className="h-32 sm:h-40 md:h-48 lg:h-56 w-auto drop-shadow-2xl"
-              style={{
-                filter: 'drop-shadow(0 20px 40px rgba(0,0,0,0.3)) drop-shadow(0 0 20px rgba(255,255,255,0.5))'
-              }}
-              loading="eager"
-              fetchPriority="high"
-              decoding="async"
-            />
+            <div className="relative">
+              {/* Glow effect behind logo */}
+              <div className="absolute inset-0 blur-3xl bg-gradient-to-br from-brand-500/30 to-amber-500/30 scale-150" />
+              <img 
+                src={logo} 
+                alt="Gangarampur Doi Ghar" 
+                className="relative h-36 sm:h-44 md:h-52 lg:h-60 w-auto drop-shadow-2xl"
+                loading="eager"
+                fetchPriority="high"
+              />
+            </div>
           </motion.div>
 
-          {/* Main Heading with text shadow for readability */}
+          {/* Main Heading - Clean Typography */}
           <motion.h1 
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.7, duration: 0.8 }}
-            className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black mb-6 leading-tight"
-            style={{ textShadow: '0 4px 12px rgba(0,0,0,0.3), 0 2px 4px rgba(0,0,0,0.2)' }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black mb-4 leading-[1.1]"
           >
-            <span className="block text-white mb-2 drop-shadow-lg">
+            <span className="block text-white tracking-tight mb-3">
               গঙ্গারামপুর
             </span>
-            <span className="block text-amber-300 drop-shadow-lg">
+            <span className="block bg-gradient-to-r from-amber-200 via-yellow-300 to-amber-200 bg-clip-text text-transparent">
               দই ঘর
             </span>
           </motion.h1>
           
-          {/* Tagline with enhanced visibility */}
+          {/* Tagline with Better Spacing */}
           <motion.p 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.9, duration: 0.8 }}
-            className="text-base md:text-2xl mb-8 text-white font-bold px-4"
-            style={{ textShadow: '0 2px 8px rgba(0,0,0,0.5)' }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+            className="text-lg md:text-2xl lg:text-3xl mb-12 text-white/90 font-semibold tracking-wide"
           >
             Traditional Taste & Timeless Quality
           </motion.p>
 
-          {/* Features with glass morphism effect */}
+          {/* Premium Feature Cards - Glass Morphism */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.1, duration: 0.8 }}
-            className="flex flex-row items-center justify-center gap-2 sm:gap-4 mb-8 px-4"
+            transition={{ duration: 0.8, delay: 0.8 }}
+            className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12 px-4"
           >
             <motion.div 
-              whileHover={{ scale: 1.05, y: -5 }}
-              transition={{ duration: 0.2 }}
-              className="group relative overflow-hidden flex-1 max-w-xs"
+              whileHover={{ y: -8, scale: 1.03 }}
+              transition={{ type: "spring", stiffness: 400, damping: 25 }}
+              className="relative group w-full sm:w-auto"
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-xl" />
-              <div className="relative flex items-center gap-2 sm:gap-3 bg-white/90 backdrop-blur-md px-3 sm:px-6 py-3 sm:py-4 rounded-xl sm:rounded-2xl shadow-2xl border-2 border-white/50 justify-center group-hover:border-amber-300 transition-all duration-200">
-                <div className="p-1.5 sm:p-2 bg-gradient-to-br from-amber-500 to-yellow-600 rounded-lg sm:rounded-xl shadow-soft flex-shrink-0">
-                  <Award className="w-4 h-4 sm:w-5 sm:h-5 text-white" strokeWidth={2.5} />
+              {/* Backdrop */}
+              <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-white/5 backdrop-blur-xl rounded-2xl border border-white/20 shadow-2xl" />
+              
+              {/* Glow on hover */}
+              <div className="absolute inset-0 bg-gradient-to-br from-amber-400/0 to-yellow-400/0 group-hover:from-amber-400/20 group-hover:to-yellow-400/20 rounded-2xl transition-all duration-500 blur-xl" />
+              
+              {/* Content */}
+              <div className="relative flex items-center gap-4 px-6 py-5 sm:px-8 sm:py-6">
+                <div className="flex-shrink-0 w-14 h-14 bg-gradient-to-br from-amber-400 to-yellow-500 rounded-xl flex items-center justify-center shadow-lg">
+                  <Award className="w-7 h-7 text-white" strokeWidth={2.5} />
                 </div>
                 <div className="text-left">
-                  <span className="font-black text-xs sm:text-base text-gray-900 block leading-tight">Premium Quality</span>
-                  <span className="text-[10px] sm:text-xs text-amber-700 font-semibold hidden sm:block">Certified Excellence</span>
+                  <div className="font-black text-lg text-white">Premium Quality</div>
+                  <div className="text-sm text-white/70 font-medium">Certified Excellence</div>
                 </div>
               </div>
             </motion.div>
 
             <motion.div 
-              whileHover={{ scale: 1.05, y: -5 }}
-              transition={{ duration: 0.2 }}
-              className="group relative overflow-hidden flex-1 max-w-xs"
+              whileHover={{ y: -8, scale: 1.03 }}
+              transition={{ type: "spring", stiffness: 400, damping: 25 }}
+              className="relative group w-full sm:w-auto"
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-emerald-400 via-green-400 to-emerald-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-xl" />
-              <div className="relative flex items-center gap-2 sm:gap-3 bg-white/90 backdrop-blur-md px-3 sm:px-6 py-3 sm:py-4 rounded-xl sm:rounded-2xl shadow-2xl border-2 border-white/50 justify-center group-hover:border-emerald-300 transition-all duration-200">
-                <div className="p-1.5 sm:p-2 bg-gradient-to-br from-emerald-500 to-green-600 rounded-lg sm:rounded-xl shadow-soft flex-shrink-0">
-                  <Clock className="w-4 h-4 sm:w-5 sm:h-5 text-white" strokeWidth={2.5} />
+              {/* Backdrop */}
+              <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-white/5 backdrop-blur-xl rounded-2xl border border-white/20 shadow-2xl" />
+              
+              {/* Glow on hover */}
+              <div className="absolute inset-0 bg-gradient-to-br from-emerald-400/0 to-green-400/0 group-hover:from-emerald-400/20 group-hover:to-green-400/20 rounded-2xl transition-all duration-500 blur-xl" />
+              
+              {/* Content */}
+              <div className="relative flex items-center gap-4 px-6 py-5 sm:px-8 sm:py-6">
+                <div className="flex-shrink-0 w-14 h-14 bg-gradient-to-br from-emerald-400 to-green-500 rounded-xl flex items-center justify-center shadow-lg">
+                  <Clock className="w-7 h-7 text-white" strokeWidth={2.5} />
                 </div>
                 <div className="text-left">
-                  <span className="font-black text-xs sm:text-base text-gray-900 block leading-tight">Fresh Daily</span>
-                  <span className="text-[10px] sm:text-xs text-emerald-700 font-semibold hidden sm:block">Made Every Morning</span>
+                  <div className="font-black text-lg text-white">Fresh Daily</div>
+                  <div className="text-sm text-white/70 font-medium">Made Every Morning</div>
                 </div>
               </div>
             </motion.div>
           </motion.div>
 
-          {/* CTA Buttons with enhanced styling */}
+          {/* CTA Buttons - Modern & Bold */}
           <motion.div 
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.3, duration: 0.8 }}
-            className="px-4 flex flex-row gap-2 sm:gap-3"
+            transition={{ duration: 0.8, delay: 1 }}
+            className="flex flex-col sm:flex-row gap-4 justify-center px-4 max-w-2xl mx-auto"
           >
             <motion.a
-              whileHover={{ scale: 1.05, y: -3 }}
+              whileHover={{ y: -5, scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               href="tel:9932552763"
-              className="flex items-center justify-center gap-2 text-white px-4 sm:px-8 py-5 sm:py-6 rounded-2xl font-black text-sm sm:text-xl shadow-2xl hover:shadow-glow transition-all duration-300 border-4 border-white/30 backdrop-blur-sm flex-1"
-              style={{
-                background: 'linear-gradient(135deg, #E63946 0%, #FF6B6B 100%)',
-                boxShadow: '0 0 60px rgba(230, 57, 70, 0.6), 0 12px 40px rgba(0, 0, 0, 0.3)'
-              }}
+              className="group relative flex-1 sm:flex-initial overflow-hidden rounded-2xl"
             >
-              <Phone className="w-5 h-5 sm:w-7 sm:h-7" strokeWidth={3} />
-              <span>Call Now</span>
+              {/* Animated gradient background */}
+              <div className="absolute inset-0 bg-gradient-to-r from-brand-600 via-brand-500 to-brand-600" 
+                   style={{ backgroundSize: '200% 100%' }} 
+              />
+              
+              {/* Shine effect on hover */}
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out" />
+              
+              {/* Button content */}
+              <div className="relative flex items-center justify-center gap-3 px-8 py-6 text-white font-black text-lg">
+                <Phone className="w-6 h-6" strokeWidth={3} />
+                <span>Call to Order</span>
+              </div>
             </motion.a>
 
             <motion.a
-              whileHover={{ scale: 1.05, y: -3 }}
+              whileHover={{ y: -5, scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               href="https://maps.app.goo.gl/4sRwmzJjDPTh7r7N6"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-center gap-2 bg-white/95 backdrop-blur-md text-brand-600 px-4 sm:px-8 py-5 sm:py-6 rounded-2xl font-black text-sm sm:text-lg shadow-2xl hover:shadow-strong transition-all duration-300 border-4 border-brand-200/50 flex-1"
+              className="group relative flex-1 sm:flex-initial rounded-2xl"
             >
-              <MapPin className="w-5 h-5 sm:w-6 sm:h-6" strokeWidth={3} />
-              <span>Location</span>
+              {/* Glass morphism background */}
+              <div className="absolute inset-0 bg-white/10 backdrop-blur-xl border-2 border-white/30 rounded-2xl" />
+              
+              {/* Hover glow */}
+              <div className="absolute inset-0 bg-white/0 group-hover:bg-white/20 rounded-2xl transition-all duration-300" />
+              
+              {/* Button content */}
+              <div className="relative flex items-center justify-center gap-3 px-8 py-6 text-white font-black text-lg">
+                <MapPin className="w-6 h-6" strokeWidth={3} />
+                <span>View Location</span>
+              </div>
             </motion.a>
           </motion.div>
-        </motion.div>
-      </div>
+        </div>
+      </motion.div>
 
-      {/* Bottom gradient fade for smooth transition */}
-      <div className="absolute bottom-0 inset-x-0 h-32 bg-gradient-to-t from-white via-white/80 to-transparent z-10 pointer-events-none" />
+      {/* Smooth Bottom Transition */}
+      <div className="absolute bottom-0 inset-x-0 h-40 bg-gradient-to-t from-white via-white/50 to-transparent z-10 pointer-events-none" />
     </motion.section>
   );
 };
